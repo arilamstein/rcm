@@ -1,0 +1,48 @@
+<html>
+<div id="result"></div>
+<script>
+
+var scales = ["G Major triplet @ 69",
+	  		  "D Major triplet @ 69",
+			  "A-flat Major triplet @ 69",
+			  "D-flat Major triplet @ 69"];
+var scale = scales[Math.floor(Math.random() * scales.length)];
+
+var note_values = ["triplet", "16th note"];
+var note_value = note_values[Math.floor(Math.random() * note_values.length)];
+
+var strokes = ["Rest Stroke", "Free Stroke"];
+var stroke  = strokes[Math.floor(Math.random() * strokes.length)];
+
+var fingerings = ["im", "ma"];
+var fingering = fingerings[Math.floor(Math.random() * fingerings.length)];
+
+var arpeggios = ["p-i-m-a ascending @ 76",
+	   			 "p-a-m-i descending @ 76",
+				 "p-i-m-i pattern @ 76",
+				 "p-m-i-m pattern @ 76",
+				 "ascending and descending sextuplet @ 52",
+				 "descending and ascending sextuplet @ 52",
+				 "p-a dyad-m-i triplet pattern @ 76",
+				 "p-i dyad-m-a triplet pattern @ 76",
+				 "p-m dyad-i-a triplet pattern @ 76",
+				 "p-i dyad-a-m triplet pattern @ 76"];
+
+var arpeggio = arpeggios[Math.floor(Math.random() * arpeggios.length)];
+
+var pieces = ["Bach Minuet", "Paganini Minuet", "Spanish Romance"];
+var piece = pieces[Math.floor(Math.random() * pieces.length)];
+
+var studies = ["Carcassi Tremolo Study", "Bosch Lamento"];
+var study = studies[Math.floor(Math.random() * studies.length)];
+
+document.getElementById("result").innerHTML = scale + ", " +
+											  note_value + ", " + 
+											  stroke + ", " + 
+											  fingering + "<br/>" + 
+											  arpeggio + "<br/>" +
+											  piece + "<br/>" +
+											  study;
+
+</script>
+</html>
