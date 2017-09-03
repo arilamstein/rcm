@@ -5,7 +5,9 @@
 var scales = ["G Major triplet @ 69",
 	  		  "D Major triplet @ 69",
 			  "A-flat Major triplet @ 69",
-			  "D-flat Major triplet @ 69"];
+			  "D-flat Major triplet @ 69",
+			  "E Minor Harmonic @ 69",
+			  "F Minor Harmonic @ 69"];
 var scale = scales[Math.floor(Math.random() * scales.length)];
 
 var note_values = ["triplet", "16th note"];
@@ -14,7 +16,7 @@ var note_value = note_values[Math.floor(Math.random() * note_values.length)];
 var strokes = ["Rest Stroke", "Free Stroke"];
 var stroke  = strokes[Math.floor(Math.random() * strokes.length)];
 
-var fingerings = ["im", "ma"];
+var fingerings = ["im", "ma", "ia"];
 var fingering = fingerings[Math.floor(Math.random() * fingerings.length)];
 
 var arpeggios = ["p-i-m-a ascending @ 76",
