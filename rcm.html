@@ -1,5 +1,5 @@
 <html>
-<div id="result"></div>
+<div id="result" style="font-size: large"></div>
 <script>
 
 function generate_new_practice()
@@ -40,13 +40,12 @@ function generate_new_practice()
 	var studies = ["Carcassi Tremolo Study", "Bosch Lamento"];
 	var study = studies[Math.floor(Math.random() * studies.length)];
 
-	return scale + ", " +
-			   note_value + ", " +
-			   stroke + ", " +
-			   fingering + "<br/>" +
-			   arpeggio + "<br/>" +
-			   piece + "<br/>" +
-			   study;
+	return "<ol>" +
+	       "<li>" + scale + ", " + note_value + ", " + stroke + ", " + fingering + "</li>" +
+			   "<li>" + arpeggio + "</li>" +
+			   "<li>" + piece + "</li>" +
+			   "<li>" + study + "</li>" +
+				 "</ol>";
 }
 
 cached_practice = localStorage.getItem("cached_practice")
