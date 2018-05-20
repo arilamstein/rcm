@@ -2,52 +2,84 @@
 <div id="result" style="font-size: large"></div>
 <script>
 
+// this program does a lot of random selection of array elements.
+function get_random_element(x)
+{
+  return x[Math.floor(Math.random() * x.length)];
+}
+
 function generate_new_practice()
 {
-  var scales = ["G Major @ 69",
-                "A-flat Major @ 69",
-                "D Major @ 69",
-                "D-flat Major @ 69",
-                "E Minor Harmonic @ 69",
-                "F Minor Harmonic @ 69",
-                "B Minor Harmonic @ 69",
-                "B-flat Minor Harmonic @ 69"];
-  var scale = scales[Math.floor(Math.random() * scales.length)];
+  // lhs is the full enumeration of the scales I need to memorize
+  // rhs is its half-step "pair"
+  // I have found it helpful to study them as pairs
+  var scales = [];
+  scales["G Major"]      = "A-flat Major";
+  scales["A-flat Major"] = "G Major";
+  scales["D Major"]      = "D-flat Major";
+  scales["D-flat Major"] = "D Major";
+  scales["E Minor"]      = "F Minor";
+  scales["F Minor"]      = "E Minor";
+  scales["B Minor"]      = "B-flat Minor";
+  scales["B-flat Minor"] = "B Minor";
 
-  var note_values = ["triplet", "16th note"];
-  var note_value = note_values[Math.floor(Math.random() * note_values.length)];
+  var scale1 = get_random_element(Object.keys(scales));
+  var scale2 = scales[scale1];
 
-  var strokes = ["Rest Stroke", "Free Stroke"];
-  var stroke  = strokes[Math.floor(Math.random() * strokes.length)];
+  // the exam requires a lot of variations of the scales
+  var note_value = get_random_element(["triplet @ 69", "16th note @ 69"]);
+  var stroke     = get_random_element(["Rest Stroke", "Free Stroke"]);
+  var fingering  = get_random_element(["im", "ma", "ia"]);
 
-  var fingerings = ["im", "ma", "ia"];
-  var fingering = fingerings[Math.floor(Math.random() * fingerings.length)];
+  // lhs is the full enumeration of the arpeggios I need to memorize
+  // rhs is its complement or "pair"
+  // I have found it helpful to study them as pairs  
+  var arpeggios = [];
+  arpeggios["p-i-m-a ascending"]                  = "p-a-m-i descending";
+  arpeggios["p-a-m-i descending"]                 = "p-i-m-a ascending";
+  arpeggios["p-i-m-i pattern"]                    = "p-m-i-m pattern ";
+  arpeggios["p-m-i-m pattern"]                    = "p-i-m-i pattern";
+  arpeggios["ascending and descending sextuplet"] = "descending and ascending sextuplet";
+  arpeggios["descending and ascending sextuplet"] = "ascending and descending sextuplet";
+  arpeggios["p-a dyad-m-i triplet pattern"]       = "p-i dyad-m-a triplet pattern";
+  arpeggios["p-i dyad-m-a triplet pattern"]       = "p-a dyad-m-i triplet pattern";
+  arpeggios["p-m dyad-i-a triplet pattern"]       = "p-i dyad-a-m triplet pattern";
+  arpeggios["p-i dyad-a-m triplet pattern"]       = "p-m dyad-i-a triplet pattern ";
 
-  var arpeggios = ["p-i-m-a ascending @ 76",
-                   "p-a-m-i descending @ 76",
-                   "p-i-m-i pattern @ 76",
-                   "p-m-i-m pattern @ 76",
-                   "ascending and descending sextuplet @ 52",
-                   "descending and ascending sextuplet @ 52",
-                   "p-a dyad-m-i triplet pattern @ 76",
-                   "p-i dyad-m-a triplet pattern @ 76",
-                   "p-m dyad-i-a triplet pattern @ 76",
-                   "p-i dyad-a-m triplet pattern @ 76"];
+  var arpeggio1 = get_random_element(Object.keys(arpeggios));
+  var arpeggio2 = arpeggios[arpeggio1];
 
-  var arpeggio = arpeggios[Math.floor(Math.random() * arpeggios.length)];
+  var arpeggio_speed = "";
+  if (arpeggio1.indexOf("sextuplet") !== -1)
+  {
+	arpeggio_speed = 52;
+  }
+  else
+  {
+	arpeggio_speed = 76;
+  }
 
-  var pieces = ["Bach Minuet", "Paganini Minuet", "Spanish Romance"];
-  var piece = pieces[Math.floor(Math.random() * pieces.length)];
+  // the pieces I am required to memorize
+  var piece = get_random_element(
+    ["Bach Minuet",
+    "Paganini Minuet",
+    "Spanish Romance"]);
 
-  var studies = ["Carcassi Tremolo Study", "Bosch Lamento"];
-  var study = studies[Math.floor(Math.random() * studies.length)];
+  // the studies I am required to memorize
+  var study = get_random_element(
+    ["Carcassi Tremolo Study",
+    "Bosch Lamento"]);
 
-  return "<ol>" +
-         "<li>" + scale + ", " + note_value + ", " + stroke + ", " + fingering + "</li>" +
-         "<li>" + arpeggio + "</li>" +
-         "<li>" + piece + "</li>" +
-         "<li>" + study + "</li>" +
-         "</ol>";
+  // output!
+  scale_output = "<b>Scales: </b>" + scale1 + " and " + scale2 + ": " + note_value + ", " + stroke + ", " + fingering;
+  arpeggio_output = "<b>Arpeggio: </b>" + arpeggio1 + " and " + arpeggio2 + " at " + arpeggio_speed;
+  piece_output = "<b>Piece: </b>" + piece;
+  study_output = "<b>Study: </b>" + study;
+
+  return "<p>" + scale_output    + "</p>" +
+         "<p>" + arpeggio_output + "</p>" +
+         "<p>" + piece_output    + "</p>" +
+         "<p>" + study_output    + "</p>";
 }
 
 cached_practice = localStorage.getItem("cached_practice")
