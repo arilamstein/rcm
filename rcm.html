@@ -27,7 +27,15 @@ function generate_new_practice()
   var scale2 = scales[scale1];
 
   // the exam requires a lot of variations of the scales
-  var note_value = get_random_element(["triplet @ 69", "16th note @ 69"]);
+  tremolando = Math.random() > (2/3); // equal practice for triplets, sixteenth notes and tremolando  
+  if (tremolando)
+  {
+	var note_value = "triplet @ 88";
+  }
+  else
+  {
+	var note_value = get_random_element(["triplet @ 69", "16th note @ 69"]);
+  }
   var stroke     = get_random_element(["Rest Stroke", "Free Stroke"]);
   var fingering  = get_random_element(["im", "ma", "ia"]);
 
@@ -71,7 +79,11 @@ function generate_new_practice()
     "Bosch Lamento"]);
 
   // output!
-  scale_output    = "<b>Scales: </b>" + scale1 + " and " + scale2 + ": " + note_value + ", " + stroke + ", " + fingering;
+  scale_output    = "<b>Scales: </b>" + scale1 + " and " + scale2 + ". " + note_value + ", " + stroke + ", " + fingering;
+  if (tremolando)
+  {
+    scale_output = scale_output + ". Tremolando";	
+  }
   arpeggio_output = "<b>Arpeggio: </b>" + arpeggio1 + " and " + arpeggio2 + " at " + arpeggio_speed;
   piece_output    = "<b>Piece: </b>" + piece;
   study_output    = "<b>Study: </b>" + study;
