@@ -1,118 +1,90 @@
+<!DOCTYPE html>
 <html>
-<div id="result" style="font-size: large"></div>
-<script>
-
+  <body>
+    <div id="result" style="font-size: large"></div>
+    <script type="application/javascript">
 // this program does a lot of random selection of array elements.
-function get_random_element(x)
-{
-  return x[Math.floor(Math.random() * x.length)];
-}
+const getRandomElement = (x) => x[Math.floor(Math.random() * x.length)];
 
-function generate_new_practice()
-{
+const generateNewPractice = () => {
   // lhs is the full enumeration of the scales I need to memorize
   // rhs is its half-step "pair"
   // I have found it helpful to study them as pairs
-  var scales = [];
-  scales["G Major"]      = "A-flat Major";
-  scales["A-flat Major"] = "G Major";
-  scales["D Major"]      = "D-flat Major";
-  scales["D-flat Major"] = "D Major";
-  scales["E Minor"]      = "F Minor";
-  scales["F Minor"]      = "E Minor";
-  scales["B Minor"]      = "B-flat Minor";
-  scales["B-flat Minor"] = "B Minor";
+  const scales = {
+    'G Major'      : 'A-flat Major',
+    'A-flat Major' : 'G Major',
+    'D Major'      : 'D-flat Major',
+    'D-flat Major' : 'D Major',
+    'E Minor'      : 'F Minor',
+    'F Minor'      : 'E Minor',
+    'B Minor'      : 'B-flat Minor',
+    'B-flat Minor' : 'B Minor',
+  };
 
-  var scale1 = get_random_element(Object.keys(scales));
-  var scale2 = scales[scale1];
-
+  const scale1 = getRandomElement(Object.keys(scales));
+  const scale2 = scales[scale1];
   // the exam requires a lot of variations of the scales
-  tremolando = Math.random() > (2/3); // equal practice for triplets, sixteenth notes and tremolando  
-  if (tremolando)
-  {
-	var note_value = "triplet @ 88";
-  }
-  else
-  {
-	var note_value = get_random_element(["triplet @ 69", "16th note @ 69"]);
-  }
-  var stroke     = get_random_element(["Rest Stroke", "Free Stroke"]);
-  var fingering  = get_random_element(["im", "ma", "ia"]);
+  const tremolando = Math.random() > (2 / 3); // equal practice for triplets, sixteenth notes and tremolando
 
+  const noteValue = tremolando ? 'triplet @ 88' : getRandomElement(['triplet @ 69', '16th note @ 69']);
+  const stroke     = getRandomElement(['Rest Stroke', 'Free Stroke']);
+  const fingering  = getRandomElement(['im', 'ma', 'ia']);
   // lhs is the full enumeration of the arpeggios I need to memorize
   // rhs is its complement or "pair"
   // I have found it helpful to study them as pairs  
-  var arpeggios = [];
-  arpeggios["p-i-m-a ascending"]                  = "p-a-m-i descending";
-  arpeggios["p-a-m-i descending"]                 = "p-i-m-a ascending";
-  arpeggios["p-i-m-i pattern"]                    = "p-m-i-m pattern ";
-  arpeggios["p-m-i-m pattern"]                    = "p-i-m-i pattern";
-  arpeggios["ascending and descending sextuplet"] = "descending and ascending sextuplet";
-  arpeggios["descending and ascending sextuplet"] = "ascending and descending sextuplet";
-  arpeggios["p-a dyad-m-i triplet pattern"]       = "p-i dyad-m-a triplet pattern";
-  arpeggios["p-i dyad-m-a triplet pattern"]       = "p-a dyad-m-i triplet pattern";
-  arpeggios["p-m dyad-i-a triplet pattern"]       = "p-i dyad-a-m triplet pattern";
-  arpeggios["p-i dyad-a-m triplet pattern"]       = "p-m dyad-i-a triplet pattern ";
-
-  var arpeggio1 = get_random_element(Object.keys(arpeggios));
-  var arpeggio2 = arpeggios[arpeggio1];
-
-  var arpeggio_speed = "";
-  if (arpeggio1.indexOf("sextuplet") !== -1)
-  {
-	arpeggio_speed = 52;
-  }
-  else
-  {
-	arpeggio_speed = 76;
-  }
+  const arpeggios = {
+    'p-i-m-a ascending'                  : 'p-a-m-i descending',
+    'p-a-m-i descending'                 : 'p-i-m-a ascending',
+    'p-i-m-i pattern'                    : 'p-m-i-m pattern ',
+    'p-m-i-m pattern'                    : 'p-i-m-i pattern',
+    'ascending and descending sextuplet' : 'descending and ascending sextuplet',
+    'descending and ascending sextuplet' : 'ascending and descending sextuplet',
+    'p-a dyad-m-i triplet pattern'       : 'p-i dyad-m-a triplet pattern',
+    'p-i dyad-m-a triplet pattern'       : 'p-a dyad-m-i triplet pattern',
+    'p-m dyad-i-a triplet pattern'       : 'p-i dyad-a-m triplet pattern',
+    'p-i dyad-a-m triplet pattern'       : 'p-m dyad-i-a triplet pattern ',
+  };
+  const arpeggio1 = getRandomElement(Object.keys(arpeggios));
+  const arpeggio2 = arpeggios[arpeggio1];
+  const arpeggioSpeed = arpeggio1.includes('sextuplet') ? '52' : '76';
 
   // the pieces I am required to memorize
-  var piece = get_random_element(
-    ["Bach Minuet",
-    "Paganini Minuet",
-    "Spanish Romance"]);
+  const piece = getRandomElement([
+    'Bach Minuet',
+    'Paganini Minuet',
+    'Spanish Romance'
+  ]);
 
   // the studies I am required to memorize
-  var study = get_random_element(
-    ["Carcassi Tremolo Study",
-    "Bosch Lamento"]);
+  const study = getRandomElement([
+    'Carcassi Tremolo Study',
+    'Bosch Lamento'
+  ]);
 
   // output!
-  scale_output    = "<b>Scales: </b>" + scale1 + " and " + scale2 + ". " + note_value + ", " + stroke + ", " + fingering;
-  if (tremolando)
-  {
-    scale_output = scale_output + ". Tremolando";	
-  }
-  arpeggio_output = "<b>Arpeggio: </b>" + arpeggio1 + " and " + arpeggio2 + " at " + arpeggio_speed;
-  piece_output    = "<b>Piece: </b>" + piece;
-  study_output    = "<b>Study: </b>" + study;
+  const scaleOutput = `<strong>Scales: </strong> ${scale1} and ${scale2}. ${noteValue}, ${stroke}, ${fingering}${tremolando ? '. Tremolando' : ''}`;
+  const arpeggioOutput = `<strong>Arpeggio: </strong> ${arpeggio1} and ${arpeggio2} at ${arpeggioSpeed}`;
+  const pieceOutput = `<strong>Piece: </strong> ${piece}`;
+  const studyOutput = `<strong>Study: </strong> ${study}`;
 
-  return "<p>" + scale_output    + "</p>" +
-         "<p>" + arpeggio_output + "</p>" +
-         "<p>" + piece_output    + "</p>" +
-         "<p>" + study_output    + "</p>";
-}
+  return '<p>' + [scaleOutput, arpeggioOutput, pieceOutput, studyOutput].join('</p><p>') + '</p>';
+};
 
-cached_practice = localStorage.getItem("cached_practice")
-cached_practice_date = localStorage.getItem("cached_practice_date")
 
-var today = new Date().getDate();
+const cachedPractice = localStorage.getItem('cached_practice');
+const cachedPracticeDate = localStorage.getItem('cached_practice_date');
+const today = String(new Date().getDate());
 
 // if we can use a cached practice, then do so
-if (cached_practice != null &&
-    cached_practice_date == today)
-{
-  document.getElementById("result").innerHTML = cached_practice;
+if (cachedPractice !== null && cachedPracticeDate === today) {
+  document.getElementById('result').innerHTML = cachedPractice;
+} else {
+  // otherwise create a new one and save it
+  const newPractice = generateNewPractice();
+  document.getElementById('result').innerHTML = newPractice;
+  localStorage.setItem('cached_practice', newPractice);
+  localStorage.setItem('cached_practice_date', today);
 }
-// otherwise create a new one and save it
-else
-{
-  new_practice = generate_new_practice();
-  document.getElementById("result").innerHTML = new_practice;
-  localStorage.setItem("cached_practice", new_practice);
-  localStorage.setItem("cached_practice_date", today);
-}
-
-</script>
+    </script>
+  </body>
 </html>
