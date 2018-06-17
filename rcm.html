@@ -11,27 +11,25 @@ const generateNewPractice = () => {
   // rhs is its half-step "pair"
   // I have found it helpful to study them as pairs
   const scales = {
-    'G Major'      : 'A-flat Major',
-    'A-flat Major' : 'G Major',
-    'D Major'      : 'D-flat Major',
-    'D-flat Major' : 'D Major',
-    'E Minor'      : 'F Minor',
-    'F Minor'      : 'E Minor',
-    'B Minor'      : 'B-flat Minor',
-    'B-flat Minor' : 'B Minor',
+    'G Major triplet @ 69'                 : 'A-flat Major triplet Tremolondo @ 88',
+    'A-flat Major triplet Tremolondo @ 88' : 'G Major triplet @ 69',
+    'D Major 16th note @ 69'               : 'D-flat Major triplet Tremolondo @ 88',
+    'D-flat Major triplet Tremolondo @ 88' : 'D Major 16th note @ 69',
+    'E Minor triplet Tremolondo @ 88'      : 'F Minor triplet @ 69',
+    'F Minor triplet @ 69'                 : 'E Minor triplet Tremolondo @ 88',
+    'B Minor triplet @ 69'                 : 'B-flat Minor 16th note @ 69',
+    'B-flat Minor 16th note @ 69'          : 'B Minor triplet @69',
+    'Chromatic C 16th note @ 69'           : 'Chromatic C 16th note @ 69'
   };
 
   const scale1 = getRandomElement(Object.keys(scales));
   const scale2 = scales[scale1];
-  // the exam requires a lot of variations of the scales
-  const tremolando = Math.random() > (2 / 3); // equal practice for triplets, sixteenth notes and tremolando
 
-  const noteValue = tremolando ? 'triplet @ 88' : getRandomElement(['triplet @ 69', '16th note @ 69']);
   const stroke     = getRandomElement(['Rest Stroke', 'Free Stroke']);
   const fingering  = getRandomElement(['im', 'ma', 'ia']);
   // lhs is the full enumeration of the arpeggios I need to memorize
   // rhs is its complement or "pair"
-  // I have found it helpful to study them as pairs  
+  // I have found it helpful to study them as pairs
   const arpeggios = {
     'p-i-m-a ascending'                  : 'p-a-m-i descending',
     'p-a-m-i descending'                 : 'p-i-m-a ascending',
@@ -62,10 +60,10 @@ const generateNewPractice = () => {
   ]);
 
   // output!
-  const scaleOutput = `<strong>Scales: </strong> ${scale1} and ${scale2}. ${noteValue}, ${stroke}, ${fingering}${tremolando ? '. Tremolando' : ''}`;
-  const arpeggioOutput = `<strong>Arpeggio: </strong> ${arpeggio1} and ${arpeggio2} at ${arpeggioSpeed}`;
-  const pieceOutput = `<strong>Piece: </strong> ${piece}`;
-  const studyOutput = `<strong>Study: </strong> ${study}`;
+  const scaleOutput    = `<strong>Scales: </strong> ${scale1} and ${scale2}. ${stroke}, ${fingering}`;
+  const arpeggioOutput = ''; //`<strong>Arpeggio: </strong> ${arpeggio1} and ${arpeggio2} at ${arpeggioSpeed}`;
+  const pieceOutput    = ''; //`<strong>Piece: </strong> ${piece}`;
+  const studyOutput    = ''; // `<strong>Study: </strong> ${study}`;
 
   return '<p>' + [scaleOutput, arpeggioOutput, pieceOutput, studyOutput].join('</p><p>') + '</p>';
 };
