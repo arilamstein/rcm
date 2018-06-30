@@ -31,7 +31,7 @@ const generateNewPractice = () => {
   // rhs is its complement or "pair"
   // I have found it helpful to study them as pairs
   const arpeggios = {
-    'p-i-m-a ascending'                  : 'p-a-m-i descending',
+    'p-i-m-a ascending'                  : 'p-a-m-i descending'/*,
     'p-a-m-i descending'                 : 'p-i-m-a ascending',
     'p-i-m-i pattern'                    : 'p-m-i-m pattern ',
     'p-m-i-m pattern'                    : 'p-i-m-i pattern',
@@ -40,7 +40,7 @@ const generateNewPractice = () => {
     'p-a dyad-m-i triplet pattern'       : 'p-i dyad-m-a triplet pattern',
     'p-i dyad-m-a triplet pattern'       : 'p-a dyad-m-i triplet pattern',
     'p-m dyad-i-a triplet pattern'       : 'p-i dyad-a-m triplet pattern',
-    'p-i dyad-a-m triplet pattern'       : 'p-m dyad-i-a triplet pattern ',
+    'p-i dyad-a-m triplet pattern'       : 'p-m dyad-i-a triplet pattern ',*/
   };
   const arpeggio1 = getRandomElement(Object.keys(arpeggios));
   const arpeggio2 = arpeggios[arpeggio1];
@@ -56,14 +56,14 @@ const generateNewPractice = () => {
   // the studies I am required to memorize
   const study = getRandomElement([
     'Carcassi Tremolo Study',
-    'Bosch Lamento'
+    'Giuliani Vivace'
   ]);
 
   // output!
   const scaleOutput    = `<strong>Scales: </strong> ${scale1} and ${scale2}. ${stroke}, ${fingering}`;
-  const arpeggioOutput = ''; //`<strong>Arpeggio: </strong> ${arpeggio1} and ${arpeggio2} at ${arpeggioSpeed}`;
-  const pieceOutput    = ''; //`<strong>Piece: </strong> ${piece}`;
-  const studyOutput    = ''; // `<strong>Study: </strong> ${study}`;
+  const arpeggioOutput = `<strong>Arpeggio: </strong> ${arpeggio1} and ${arpeggio2} at ${arpeggioSpeed}`;
+  const pieceOutput    = `<strong>Piece: </strong> ${piece}`;
+  const studyOutput    = `<strong>Study: </strong> ${study}`;
 
   return '<p>' + [scaleOutput, arpeggioOutput, pieceOutput, studyOutput].join('</p><p>') + '</p>';
 };
