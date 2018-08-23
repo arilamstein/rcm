@@ -18,8 +18,7 @@ const generateNewPractice = () => {
     'E Minor triplet Tremolondo @ 88'      : 'F Minor triplet @ 69',
     'F Minor triplet @ 69'                 : 'E Minor triplet Tremolondo @ 88',
     'B Minor triplet @ 69'                 : 'B-flat Minor 16th note @ 69',
-    'B-flat Minor 16th note @ 69'          : 'B Minor triplet @69',
-    'Chromatic C 16th note @ 69'           : 'Chromatic C 16th note @ 69'
+    'B-flat Minor 16th note @ 69'          : 'B Minor triplet @69'
   };
 
   const scale1 = getRandomElement(Object.keys(scales));
@@ -31,20 +30,25 @@ const generateNewPractice = () => {
   // rhs is its complement or "pair"
   // I have found it helpful to study them as pairs
   const arpeggios = {
-    'p-i-m-a ascending'                  : 'p-a-m-i descending'/*,
+    'p-i-m-a ascending'                  : 'p-a-m-i descending',
     'p-a-m-i descending'                 : 'p-i-m-a ascending',
     'p-i-m-i pattern'                    : 'p-m-i-m pattern ',
     'p-m-i-m pattern'                    : 'p-i-m-i pattern',
-    'ascending and descending sextuplet' : 'descending and ascending sextuplet',
-    'descending and ascending sextuplet' : 'ascending and descending sextuplet',
+/*    'ascending and descending sextuplet' : 'descending and ascending sextuplet',
+    'descending and ascending sextuplet' : 'ascending and descending sextuplet',*/
     'p-a dyad-m-i triplet pattern'       : 'p-i dyad-m-a triplet pattern',
     'p-i dyad-m-a triplet pattern'       : 'p-a dyad-m-i triplet pattern',
     'p-m dyad-i-a triplet pattern'       : 'p-i dyad-a-m triplet pattern',
-    'p-i dyad-a-m triplet pattern'       : 'p-m dyad-i-a triplet pattern ',*/
+    'p-i dyad-a-m triplet pattern'       : 'p-m dyad-i-a triplet pattern ',
   };
   const arpeggio1 = getRandomElement(Object.keys(arpeggios));
   const arpeggio2 = arpeggios[arpeggio1];
   const arpeggioSpeed = arpeggio1.includes('sextuplet') ? '52' : '76';
+
+  const weirdScale = getRandomElement([
+    'Chromatic C Scale 16th Note @ 69',
+    'Slur C Scale 8th note @ 60',
+    'Slur G Scale 8th note @ 60']);
 
   // the pieces I am required to memorize
   const piece = getRandomElement([
@@ -60,12 +64,13 @@ const generateNewPractice = () => {
   ]);
 
   // output!
-  const scaleOutput    = `<strong>Scales: </strong> ${scale1} and ${scale2}. ${stroke}, ${fingering}`;
-  const arpeggioOutput = `<strong>Arpeggio: </strong> ${arpeggio1} and ${arpeggio2} at ${arpeggioSpeed}`;
-  const pieceOutput    = `<strong>Piece: </strong> ${piece}`;
-  const studyOutput    = `<strong>Study: </strong> ${study}`;
+  const scaleOutput      = `<strong>Diatonic Scales: </strong> ${scale1} and ${scale2}. ${stroke}, ${fingering}`;
+  const arpeggioOutput   = `<strong>Arpeggio: </strong> ${arpeggio1} and ${arpeggio2} at ${arpeggioSpeed}`;
+  const weirdScaleOutput = `<strong>Weird Scale: </strong> ${weirdScale}. ${stroke}, ${fingering}`;
+  const pieceOutput      = `<strong>Piece: </strong> ${piece}`;
+  const studyOutput      = `<strong>Study: </strong> ${study}`;
 
-  return '<p>' + [scaleOutput, arpeggioOutput, pieceOutput, studyOutput].join('</p><p>') + '</p>';
+  return '<p>' + [scaleOutput, arpeggioOutput, weirdScaleOutput, pieceOutput, studyOutput].join('</p><p>') + '</p>';
 };
 
 
